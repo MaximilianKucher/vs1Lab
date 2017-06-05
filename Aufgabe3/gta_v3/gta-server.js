@@ -58,24 +58,70 @@ function geoTag() {
 var geoTagsModule = (function() {
 	
 	// Private Attribute
+	// speichert alle geoTags
 	var geoTags = [];
 
 	// Oeffentliche Attribute
 	return {
-		searchGeoTagsByCoordinates : function() {
 
+		// Sucht geoTags in einem Radius um eine Koordinate und gibt ein Array zurück, welches alle in Frage kommenden geoTags enthält
+		searchGeoTagsByCoordinates : function(latitude, longitude, radius) {
+
+			var counter = 0;
+			var geoTagsFound = [];
+
+			geoTags.forEach(function (element) {
+				// Der Abstand von zwei Punkten ist die Wurzel aus der Summe der Quadraten der Differenzen der einzelnen Komponenten
+				if(radius >= Math.sqrt(Math.pow(element.latitude - latitude, 2) + Math.pow(element.longitude - longitude, 2))) {
+					geoTagsFound.push(geoTags[counter]);
+				}
+
+				counter++;
+			});
+
+			return geoTagsFound;
 		},
 
-		searchGeoTagsBySearchterm : function() {
 
+		// Sucht geoTags nach einem Suchbegriff und gibt ein Array zurück, welches alle geoTags enthält die in ihrem Namen den Suchbegriff enthalten
+		searchGeoTagsBySearchterm : function(searchterm) {
+
+			var counter = 0;
+			var geoTagsFound = [];
+
+			geoTags.forEach(function (element) {
+				if(element.name.toString().includes(searchterm.toString())) {
+					geoTagsFound.push(geoTags[counter]);
+				}
+
+				counter++;
+			});
+
+			return geoTagsFound;
 		},
 
-		addGeoTag : function() {
 
+		// Fügt einen geoTag hinzu
+		addGeoTag : function(geoTag) {
+			geoTags.push(geoTag);
 		},
 
-		deleteGeoTag : function() {
-			
+
+		// Löscht einen geoTag, dabei werden die Koordinaten, der name und der Hashtag aller geoTags verglichen und alle infrage kommenden gelöscht
+		deleteGeoTag : function(geoTag) {
+
+			var counter = 0;
+
+			geoTags.forEach(function (element) {
+				if(geoTag.latitude == element.latitude && 
+				geoTag.longitude == element.longitude && 
+				geoTag.name == element.name && 
+				geoTag.hashtag == element.hashtag) {
+					geoTags.remove(counter);
+				}
+
+				couner++;
+			});
 		}
 	};
 
