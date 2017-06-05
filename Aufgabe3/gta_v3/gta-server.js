@@ -38,6 +38,12 @@ app.use(express.static(__dirname + "/public"));
  */
 
 // TODO: CODE ERGÄNZEN
+function geoTag() {
+	this.latitude = document.getElementById("latitude");
+	this.longitude = document.getElementById("longitude");
+	this.name = document.getElementById("name");
+	this.hashtag = document.getElementById("hashtag");
+}
 
 /**
  * Modul für 'In-Memory'-Speicherung von GeoTags mit folgenden Komponenten:
