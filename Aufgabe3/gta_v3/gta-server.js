@@ -55,6 +55,31 @@ function geoTag() {
  */
 
 // TODO: CODE ERGÄNZEN
+var geoTagsModule = (function() {
+	
+	// Private Attribute
+	var geoTags = [];
+
+	// Oeffentliche Attribute
+	return {
+		searchGeoTagsByCoordinates : function() {
+
+		},
+
+		searchGeoTagsBySearchterm : function() {
+
+		},
+
+		addGeoTag : function() {
+
+		},
+
+		deleteGeoTag : function() {
+			
+		}
+	};
+
+})();
 
 /**
  * Route mit Pfad '/' für HTTP 'GET' Requests.
