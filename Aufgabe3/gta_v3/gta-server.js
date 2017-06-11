@@ -127,6 +127,7 @@ var geoTagsModule = (function() {
 
 })();
 
+
 /**
  * Route mit Pfad '/' für HTTP 'GET' Requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
@@ -141,6 +142,7 @@ app.get('/', function(req, res) {
         taglist: []
     });
 });
+
 
 /**
  * Route mit Pfad '/tagging' für HTTP 'POST' Requests.
@@ -169,6 +171,7 @@ app.post('/tagging', function(req, res) {
 	});
 });
 
+
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
  * (http://expressjs.com/de/4x/api.html#app.post.method)
@@ -194,6 +197,7 @@ app.post('/discovery', function(req, res) {
 		});
 	}
 });
+
 
 /**
  * Setze Port und speichere in Express.
