@@ -156,18 +156,18 @@ app.get('/', function(req, res) {
  */
 
 // TODO: CODE ERGÄNZEN START
-app.post('/tagging', function(req, res, next) {
+app.post('/tagging', function(req, res) {
 	// Neuen Geo Tag aus den Formulardaten des Tagging Formulars erstellen
 	var geoTag = new geoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
-	var radius = 0.005
+	var radius = 0.005;
 
 	// Den Geo Tag speichern
 	geoTagsModule.addGeoTag(geoTag);
 
 	res.render('gta', {
 		taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
-	})
-})
+	});
+});
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
@@ -182,6 +182,18 @@ app.post('/tagging', function(req, res, next) {
  */
 
 // TODO: CODE ERGÄNZEN
+app.post('/discovery', function(req, res) {
+	if(req.body.searchterm != undefined) {
+		res.render('gta', {
+			taglist: geoTagsModule.searchGeoTagsBySearchterm(req.body.searchterm)
+		});
+	} else {
+		var radius = 0.005;
+		res.render('gta', {
+			taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
+		});
+	}
+});
 
 /**
  * Setze Port und speichere in Express.
