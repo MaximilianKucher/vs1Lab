@@ -49,6 +49,7 @@ ul {
 
 li{
   background-color: #51CED6;
+  margin-bottom: 3px;
   padding: 3px;
   width: 150%;
   border-radius: 5px;
