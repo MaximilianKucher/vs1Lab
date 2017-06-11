@@ -157,11 +157,16 @@ app.get('/', function(req, res) {
 
 // TODO: CODE ERGÄNZEN START
 app.post('/tagging', function(req, res, next) {
-	// Neuen Geo Tag erstellen aus den Formulardaten
+	// Neuen Geo Tag aus den Formulardaten des Tagging Formulars erstellen
 	var geoTag = new geoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
+	var radius = 0.005
 
-	// den Geo Tag speichern
+	// Den Geo Tag speichern
 	geoTagsModule.addGeoTag(geoTag);
+
+	res.render('gta', {
+		taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
+	})
 })
 
 /**
