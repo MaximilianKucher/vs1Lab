@@ -38,11 +38,11 @@ app.use(express.static(__dirname + "/public"));
  */
 
 // TODO: CODE ERGÄNZEN
-function geoTag() {
-	this.latitude = document.getElementById("latitude");
-	this.longitude = document.getElementById("longitude");
-	this.name = document.getElementById("name");
-	this.hashtag = document.getElementById("hashtag");
+function geoTag(latitude, longitude, name, hashtag) {
+	this.latitude = latitude;
+	this.longitude = longithude;
+	this.name = name;
+	this.hasthtag = hashtag;
 }
 
 /**
@@ -156,6 +156,7 @@ app.get('/', function(req, res) {
  */
 
 // TODO: CODE ERGÄNZEN START
+
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
