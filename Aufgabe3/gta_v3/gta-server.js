@@ -156,7 +156,10 @@ app.get('/', function(req, res) {
  */
 
 // TODO: CODE ERGÄNZEN START
-
+app.post('/tagging', function(req, res, next) {
+	var geoTag = new geoTag(req.body.latitude, req.body.longitude, req.body.name, req.body.hashtag);
+	
+})
 
 /**
  * Route mit Pfad '/discovery' für HTTP 'POST' Requests.
