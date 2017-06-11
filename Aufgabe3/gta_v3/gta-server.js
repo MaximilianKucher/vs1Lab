@@ -40,9 +40,9 @@ app.use(express.static(__dirname + "/public"));
 // TODO: CODE ERGÄNZEN
 function geoTag(latitude, longitude, name, hashtag) {
 	this.latitude = latitude;
-	this.longitude = longithude;
+	this.longitude = longitude;
 	this.name = name;
-	this.hasthtag = hashtag;
+	this.hashtag = hashtag;
 }
 
 /**
