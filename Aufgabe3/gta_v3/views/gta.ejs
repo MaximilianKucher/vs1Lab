@@ -31,9 +31,11 @@
 							<fieldset>
 								<legend> Data Input:</legend>
 								<label for="latitude" > Latitude: </label>
-								<input id="latitude" type="text" name="latitude" placeholder=" 49.01379" required>
+								<% (function(gtag) { %>
+								<input id="latitude" type="text" name="latitude" placeholder=" 49.01379" value="" required>
+								<% }); %>
 								<label for="longitude" > Longitude: </label>
-								<input id="longitude" type="text" name="longitude" placeholder=" 8.390071" required>
+								<input id="longitude" type="text" name="longitude" placeholder=" 8.390071" value="" required>
 								<label for="name" > Name: </label>
 								<input id="name" type="text" name="name" placeholder=" Castle" maxlength="10" required/>
 								<label for="hashtag" > Hashtag: </label>

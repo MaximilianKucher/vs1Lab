@@ -71,7 +71,7 @@ var geoTagsModule = (function() {
 			var geoTagsFound = [];
 
 			geoTags.forEach(function (element) {
-				// Der Abstand von zwei Punkten ist die Wurzel aus der Summe der Quadraten der Differenzen der einzelnen Komponenten
+				// Der Abstand von zwei Punkten ist die Wurzel aus der Summe der Quadrate der Differenzen der einzelnen Komponenten
 				if(radius >= Math.sqrt(Math.pow(element.latitude - latitude, 2) + Math.pow(element.longitude - longitude, 2))) {
 					geoTagsFound.push(geoTags[counter]);
 				}
@@ -113,10 +113,10 @@ var geoTagsModule = (function() {
 			var counter = 0;
 
 			geoTags.forEach(function (element) {
-				if(geoTag.latitude == element.latitude && 
-				geoTag.longitude == element.longitude && 
-				geoTag.name == element.name && 
-				geoTag.hashtag == element.hashtag) {
+				if(geoTag.latitude === element.latitude && 
+				geoTag.longitude === element.longitude && 
+				geoTag.name === element.name && 
+				geoTag.hashtag === element.hashtag) {
 					geoTags.remove(counter);
 				}
 
@@ -186,12 +186,12 @@ app.post('/tagging', function(req, res) {
 
 // TODO: CODE ERGÄNZEN
 app.post('/discovery', function(req, res) {
-	if(req.body.searchterm != undefined) {
+	if(req.body.searchterm != undefined || req.body.searchterm !== "") {
 		res.render('gta', {
 			taglist: geoTagsModule.searchGeoTagsBySearchterm(req.body.searchterm)
 		});
 	} else {
-		var radius = 0.005;
+		var radius = 0.01;
 		res.render('gta', {
 			taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
 		});

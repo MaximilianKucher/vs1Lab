@@ -117,8 +117,10 @@ var gtaLocator = (function GtaLocator() {
             function error(msg) {
                 alert(msg);
             }
-
-            tryLocate(success,error);
+	    
+	    if ($("#hiddenlatitude").attr("value") === "" && $("#hiddenlongitude").attr("value") === "") {
+		tryLocate(success,error);
+	    }
         }
 
     }; // ... Ende öffentlicher Teil
@@ -130,7 +132,6 @@ var gtaLocator = (function GtaLocator() {
  * des Skripts.
  */
 $(document).ready(function () {
-    alert("Hello World")
     // TODO Hier den Aufruf für updateLocation einfügen
     gtaLocator.update();
 });
