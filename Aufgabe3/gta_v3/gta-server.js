@@ -64,6 +64,10 @@ var geoTagsModule = (function() {
 	// Oeffentliche Attribute
 	return {
 
+		getGeoTags : function() {
+			return geoTags;
+		},
+
 		// Sucht geoTags in einem Radius um eine Koordinate und gibt ein Array zurück, welches alle in Frage kommenden geoTags enthält
 		searchGeoTagsByCoordinates : function(latitude, longitude, radius) {
 
@@ -88,6 +92,10 @@ var geoTagsModule = (function() {
 
 			var counter = 0;
 			var geoTagsFound = [];
+
+			if(searchterm == "") {
+					return geoTagsFound;
+			}
 
 			geoTags.forEach(function (element) {
 				if(element.name.toString().includes(searchterm.toString())) {
@@ -167,8 +175,10 @@ app.post('/tagging', function(req, res) {
 	geoTagsModule.addGeoTag(newGeoTag);
 
 	res.render('gta', {
-		taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
-	});
+		taglist: geoTagsModule.getGeoTags(),
+        latitude: typeof req.body.latitude !== 'undefined' ? req.body.latitude : "",
+        longitude: typeof req.body.longitude !== 'undefined' ? req.body.longitude : ""
+    });
 });
 
 
@@ -186,16 +196,21 @@ app.post('/tagging', function(req, res) {
 
 // TODO: CODE ERGÄNZEN
 app.post('/discovery', function(req, res) {
-	if(req.body.searchterm != undefined || req.body.searchterm !== "") {
-		res.render('gta', {
-			taglist: geoTagsModule.searchGeoTagsBySearchterm(req.body.searchterm)
-		});
+
+	var taglist = [];
+
+	if(req.body.searchterm != undefined || req.body.searchterm !== "") {	
+		taglist =  geoTagsModule.searchGeoTagsBySearchterm(req.body.searchterm);
 	} else {
 		var radius = 0.01;
-		res.render('gta', {
-			taglist: geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius)
-		});
+		taglist = geoTagsModule.searchGeoTagsByCoordinates(req.body.latitude, req.body.longitude, radius);
 	}
+
+	res.render('gta', {
+		taglist: taglist,
+        latitude: typeof req.body.hiddenlatitude !== 'undefined' ? req.body.hiddenlatitude : "",
+        longitude: typeof req.body.hiddenlongitude !== 'undefined' ? req.body.hiddenlongitude : ""
+    });
 });
 
 

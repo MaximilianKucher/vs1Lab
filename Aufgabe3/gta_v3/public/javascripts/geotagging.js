@@ -115,12 +115,16 @@ var gtaLocator = (function GtaLocator() {
              * Funktion soll ein alert öffnen und Fehlernachricht ausgeben.
              */
             function error(msg) {
-                alert(msg);
+                window.alert(msg);
             }
-	    
-	    if ($("#hiddenlatitude").attr("value") === "" && $("#hiddenlongitude").attr("value") === "") {
-		tryLocate(success,error);
-	    }
+
+
+            // Aufgabe 3
+
+	        if ($("#latitude").val() === "" || $("#longitude").val() === "") {
+                tryLocate(success,error);
+                console.log("tryLocate ausgeführt.");
+            }
         }
 
     }; // ... Ende öffentlicher Teil
